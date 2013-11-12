@@ -1,6 +1,6 @@
 class php5::php5-fpm (
 
-  $apache = true
+  $apache = false
 
 ) inherits php5::params {
 
