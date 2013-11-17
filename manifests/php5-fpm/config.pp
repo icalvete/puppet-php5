@@ -26,7 +26,7 @@ class php5::php5-fpm::config (
     ]
   }
 
-  if $apache == true {
+  if $apache {
     file {'fpm_config':
       ensure => present,
       path   => '/etc/apache2/conf.d/fpm',
@@ -34,7 +34,6 @@ class php5::php5-fpm::config (
       owner  => 'root',
       group  => 'root',
       mode   => '0644',
-     #notify => Service['apache2']
     }
   }
 }
