@@ -1,8 +1,4 @@
-class php5::php5-fpm::config (
-
-  $apache = true
-
-) {
+class php5::php5-fpm::config {
 
   augeas{'include_path_fpm' :
     context => '/files/$php5::params::php5_fpm_phpini/PHP',
@@ -24,16 +20,5 @@ class php5::php5-fpm::config (
       'set max_input_time 15',
       'set memory_limit 32M',
     ]
-  }
-
-  if $apache {
-    file {'fpm_config':
-      ensure => present,
-      path   => '/etc/apache2/conf.d/fpm',
-      source => "puppet:///modules/${module_name}/fpm",
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
-    }
   }
 }
