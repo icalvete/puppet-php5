@@ -46,7 +46,7 @@ class php5::php5-amqp (
 
   if $fpm {
     augeas {'amqp_fpm':
-      context => '/files/etc/php5/fpm/php.ini/PHP',
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
       changes => 'set extension[last()+1] amqp.so',
       require => [File['librabbitmq.la'],File['librabbitmq.so'],File['librabbitmq.so.1'],File['librabbitmq.so.1.0.1'],File['amqp.so']],
       onlyif  => "match extension[. = 'amqp.so'] size == 0",
@@ -54,14 +54,14 @@ class php5::php5-amqp (
 
     exec {'active_amqp_fpm':
       cwd     => '/tmp',
-      command => "/etc/init.d/php5-fpm reload",
+      command => '/etc/init.d/php5-fpm reload',
       require => Augeas['amqp_fpm']
     }
   }
 
   if $cli {
     augeas {'amqp_cli':
-      context => '/files/etc/php5/cli/php.ini/PHP',
+      context => "/files/${php5::params::php5_cli_phpini}/PHP",
       changes => 'set extension[last()+1] amqp.so',
       require => [File['librabbitmq.la'],File['librabbitmq.so'],File['librabbitmq.so.1'],File['librabbitmq.so.1.0.1'],File['amqp.so']],
       onlyif  => "match extension[. = 'amqp.so'] size == 0"

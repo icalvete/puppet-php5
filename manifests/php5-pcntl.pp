@@ -16,13 +16,13 @@ class php5::php5-pcntl (
 
   if $fpm {
     augeas{'pcntl_fpm':
-      context => "/files/etc/php5/fpm/php.ini/PHP",
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
       changes => "set extension pcntl.so",
     }
   }
 
   augeas{'pcntl_cli':
-    context => "/files/etc/php5/cli/php.ini/PHP",
+    context => "/files/${php5::params::php5_cli_phpini}/PHP",
     changes => "set extension[last()+1] pcntl.so",
     onlyif  => "match extension[. = 'pcntl.so'] size == 0"
   }
