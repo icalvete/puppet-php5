@@ -1,8 +1,4 @@
-class php5::php5-fpm (
-
-  $apache = false
-
-) inherits php5::params {
+class php5::php5-fpm inherits php5::params {
 
   anchor {'php5::php5-fpm::begin':
     before => Class['php5::php5-fpm::install']
@@ -14,7 +10,6 @@ class php5::php5-fpm (
 
   class {'php5::php5-fpm::config':
     require => Class['php5::php5-fpm::install'],
-    apache  => $apache
   }
 
   class {'php5::php5-fpm::service':
