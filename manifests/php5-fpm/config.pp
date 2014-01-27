@@ -21,4 +21,14 @@ class php5::php5-fpm::config {
       'set memory_limit 32M',
     ]
   }
+
+  exec{ 'config_www_pool_listen':
+    command => "/bin/sed -i -e \"s/listen = .*/listen = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
+    unless  => "/bin/grep 'listen = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"
+  }
+
+  exec{ 'config_www_pool_listen_allowed_clients':
+    command => "/bin/sed -i -e \"s/listen.allowed_clients = .*/listen.allowed_clients = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
+    unless  => "/bin/grep 'listen.allowed_clients = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"
+  }
 }
