@@ -23,6 +23,7 @@ class php5::php5-cli::config {
       'set max_execution_time 15',
       'set max_input_time 15',
       'set memory_limit 32M',
+      "set date.timezone ${php5::params::timezone}",
     ]
   }
 }

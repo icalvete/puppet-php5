@@ -1,5 +1,7 @@
 class php5::params {
 
+  $timezone = 'Europe/Madrid'
+
   case $::operatingsystem {
     /^(Debian|Ubuntu)$/: {
       $php5_package      = 'php5'
