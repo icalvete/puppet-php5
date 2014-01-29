@@ -40,4 +40,11 @@ class php5::php5-fpm::config {
       onlyif  => "match extension[. = '${php5::params::extension_dir}phalcon.so'] size == 0",
     }
   }
+
+  if $php5::params::environment == 'DES' {
+    augeas{'display_errors_fpm':
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+      changes => 'set display_errors On',
+    }
+  }
 }

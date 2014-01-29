@@ -30,4 +30,11 @@ class php5::php5-cli::config {
       onlyif  => "match extension[. = '${php5::params::extension_dir}phalcon.so'] size == 0"
     }
   }
+
+  if $php5::params::environment == 'DES' {
+    augeas{'display_errors_cli':
+      context => "/files/${php5::params::php5_cli_phpini}/PHP",
+      changes => 'set display_errors On',
+    }
+  }
 }

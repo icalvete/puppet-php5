@@ -1,5 +1,6 @@
 class php5::params {
 
+  $environment = hiera('environment')
   $timezone = 'Europe/Madrid'
 
   $phalcon_support = {
