@@ -32,4 +32,12 @@ class php5::php5-fpm::config {
     command => "/bin/sed -i -e \"s/listen.allowed_clients = .*/listen.allowed_clients = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
     unless  => "/bin/grep 'listen.allowed_clients = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"
   }
+
+  if $php5::fpm {
+    augeas{'phalcon_fpm':
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+      changes => "set extension ${php5::params::extension_dir}phalcon.so",
+      onlyif  => "match extension[. = '${php5::params::extension_dir}phalcon.so'] size == 0",
+    }
+  }
 }

@@ -2,16 +2,21 @@ class php5::params {
 
   $timezone = 'Europe/Madrid'
 
+  $phalcon_support = {
+    'Debian' => { 'saucy' => true }
+  }
+
   case $::operatingsystem {
     /^(Debian|Ubuntu)$/: {
       $php5_package      = 'php5'
       $php5_fpm_service  = 'php5-fpm'
       $php5_fpm_package  = 'php5-fpm'
-      $php5_modules      = ['php5-curl','php5-mysqlnd']
+      $php5_modules      = ['php5-curl','php5-mysqlnd','php5-memcached']
       $php5_cli_phpini   = 'etc/php5/cli/php.ini'
       $php5_includepath  = '/usr/share/php5'
       $php5_fpm_phpini   = '/etc/php5/fpm/php.ini'
       $php5_fpm_www_pool = '/etc/php5/fpm/pool.d/www.conf'
+      $extension_dir     = '/usr/lib/php5/'
     }
     /^(RedHat|CentOS)$/: {
       $php5_package      = 'php'
@@ -21,6 +26,7 @@ class php5::params {
       $php5_includepath  = '/usr/share/php'
       $php5_fpm_phpini   = '/etc/php.ini'
       $php5_fpm_www_pool = '/etc/php-fpm.d/www.conf'
+      $extension_dir     = '/usr/lib64/php/modules/'
     }
     default: {
       fail ("${::operatingsystem} not supported.")

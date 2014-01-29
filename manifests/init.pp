@@ -1,9 +1,14 @@
 class php5 (
 
-  $fpm  = false,
-  $amqp = false
+  $fpm     = false,
+  $amqp    = false,
+  $phalcon = false
 
 ) inherits php5::params {
+
+  if $phalcon and ! $phalcon_support[$osfamily][$lsbdistcodename] {
+    fail("Falcom module isn't supported in $osfamily $lsbdistcodename")
+  }
 
   anchor {'php5::begin':
     before => Class['php5::install']
@@ -18,30 +23,11 @@ class php5 (
   }
 
   if $fpm {
-
-    if $amqp {
-
-      class {'php5::php5-fpm':
-        require => Class['php5::config'],
-        before  => Class['php5::php5-amqp']
-      }
-
-    } else {
-
       class {'php5::php5-fpm':
         require => Class['php5::config'],
       }
-
-    }
   }
-
-  if $amqp {
-    class {'php5::php5-amqp':
-      fpm     => $fpm,
-      require => Class['php5::config']
-    }
-  }
-
+include php5::php5-amqp
   anchor {'php5::end':
     require => Class['php5::config']
   }
