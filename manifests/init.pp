@@ -27,7 +27,7 @@ class php5 (
         require => Class['php5::config'],
       }
   }
-include php5::php5-amqp
+
   anchor {'php5::end':
     require => Class['php5::config']
   }
