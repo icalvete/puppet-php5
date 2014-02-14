@@ -12,7 +12,16 @@ class php5::params {
       $php5_package      = 'php5'
       $php5_fpm_service  = 'php5-fpm'
       $php5_fpm_package  = 'php5-fpm'
-      $php5_modules      = ['php5-curl','php5-mysqlnd','php5-memcached', 'php5-mongo']
+
+      case $::lsbdistcodename {
+        /^saucy/: {
+          $php5_modules = ['php5-curl','php5-mysqlnd','php5-memcached', 'php5-mongo']
+        }
+        default: {
+          $php5_modules = ['php5-curl','php5-mysqlnd','php5-memcached']
+        }
+      }
+
       $php5_cli_phpini   = 'etc/php5/cli/php.ini'
       $php5_includepath  = '/usr/share/php5'
       $php5_fpm_phpini   = '/etc/php5/fpm/php.ini'
