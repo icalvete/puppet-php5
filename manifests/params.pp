@@ -15,10 +15,10 @@ class php5::params {
 
       case $::lsbdistcodename {
         /^saucy/: {
-          $php5_modules = ['php5-curl','php5-mysqlnd','php5-memcached', 'php5-mongo']
+          $php5_modules = ['php5-curl','php5-mysqlnd','php5-memcached', 'php5-json', 'php5-mongo']
         }
         default: {
-          $php5_modules = ['php5-curl','php5-mysqlnd','php5-memcached']
+          $php5_modules = ['php5-curl','php5-mysqlnd','php5-memcached', 'php5-json']
         }
       }
 
