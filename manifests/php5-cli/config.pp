@@ -31,7 +31,7 @@ class php5::php5-cli::config {
     }
   }
 
-  if $php5::params::environment == 'DES' {
+  if $php5::params::environment == 'DEV' {
     augeas{'display_errors_cli':
       context => "/files/${php5::params::php5_cli_phpini}/PHP",
       changes => 'set display_errors On',
