@@ -19,10 +19,9 @@ class php5::php5-fpm::config {
       'set max_execution_time 15',
       'set max_input_time 15',
       'set memory_limit 32M',
+      "set date.timezone ${php5::params::timezone}",
     ]
   }
-<<<<<<< Updated upstream
-=======
 
   exec{ 'config_www_pool_listen':
     command => "/bin/sed -i -e \"s/listen = .*/listen = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
@@ -42,11 +41,10 @@ class php5::php5-fpm::config {
     }
   }
 
-  if $php5::params::environment == 'DES' {
+  if $php5::params::environment == 'DEV' {
     augeas{'display_errors_fpm':
       context => "/files/${php5::params::php5_fpm_phpini}/PHP",
       changes => 'set display_errors On',
     }
   }
->>>>>>> Stashed changes
 }

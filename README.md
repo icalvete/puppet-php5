@@ -8,7 +8,7 @@ Puppet manifest to install and configure php5
 
 * php5 + fpm for apache2
 * php5 cli
-* include rabbitmq and pcntl modules
+* include phalcon module (Only for Ubuntu saucy)
 
 ##Requires:
 
