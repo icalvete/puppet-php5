@@ -21,4 +21,32 @@ class php5::php5-fpm::config {
       'set memory_limit 32M',
     ]
   }
+<<<<<<< Updated upstream
+=======
+
+  exec{ 'config_www_pool_listen':
+    command => "/bin/sed -i -e \"s/listen = .*/listen = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
+    unless  => "/bin/grep 'listen = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"
+  }
+
+  exec{ 'config_www_pool_listen_allowed_clients':
+    command => "/bin/sed -i -e \"s/listen.allowed_clients = .*/listen.allowed_clients = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
+    unless  => "/bin/grep 'listen.allowed_clients = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"
+  }
+
+  if $php5::phalcon {
+    augeas{'phalcon_fpm':
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+      changes => "set extension ${php5::params::extension_dir}phalcon.so",
+      onlyif  => "match extension[. = '${php5::params::extension_dir}phalcon.so'] size == 0",
+    }
+  }
+
+  if $php5::params::environment == 'DES' {
+    augeas{'display_errors_fpm':
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+      changes => 'set display_errors On',
+    }
+  }
+>>>>>>> Stashed changes
 }
