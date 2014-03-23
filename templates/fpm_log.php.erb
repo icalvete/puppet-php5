@@ -1,0 +1,3 @@
+<?php
+
+openlog('::<%= scope.lookupvar('php5::params::environment') -%>::php-fpm::', 0, <%= scope.lookupvar('php5::params::syslog_facility_php') -%>);

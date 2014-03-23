@@ -7,6 +7,9 @@ class php5::params {
     'Debian' => { 'saucy' => true }
   }
 
+  $syslog_facility     = 'local4'
+  $syslog_facility_php = 'LOG_LOCAL4'
+
   case $::operatingsystem {
     /^(Debian|Ubuntu)$/: {
       $php5_package      = 'php5'
@@ -25,6 +28,7 @@ class php5::params {
       $php5_cli_phpini   = 'etc/php5/cli/php.ini'
       $php5_includepath  = '/usr/share/php5'
       $php5_fpm_phpini   = '/etc/php5/fpm/php.ini'
+      $php5_fpm_conf     = '/etc/php5/fpm/php-fpm.conf'
       $php5_fpm_www_pool = '/etc/php5/fpm/pool.d/www.conf'
       $extension_dir     = '/usr/lib/php5/'
     }
@@ -35,6 +39,7 @@ class php5::params {
       $php5_cli_phpini   = 'etc/php.ini'
       $php5_includepath  = '/usr/share/php'
       $php5_fpm_phpini   = '/etc/php.ini'
+      $php5_fpm_conf     = '/etc/php-fpm.d/fpm.conf'
       $php5_fpm_www_pool = '/etc/php-fpm.d/www.conf'
       $extension_dir     = '/usr/lib64/php/modules/'
     }

@@ -23,6 +23,15 @@ class php5::php5-cli::config {
     ]
   }
 
+  augeas{'cli_debug' :
+    context => "/files/${php5::params::php5_cli_phpini}/PHP",
+    changes => [
+      'set error_log syslog',
+      'set auto_prepend_file cli_log.php',
+    ]
+  }
+
+
   if $php5::phalcon {
     augeas{'phalcon_cli':
       context => "/files/${php5::params::php5_cli_phpini}/PHP",

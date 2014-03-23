@@ -4,6 +4,10 @@ class php5::install inherits php5::params {
     ensure => present
   }
 
+  class {'php5::php5-cli::install':
+    require => Package[$php5::params::php5_package]
+  }
+
   case $::operatingsystem {
 
     /^(Debian|Ubuntu)$/: {
