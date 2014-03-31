@@ -1,8 +1,9 @@
 class php5 (
 
-  $fpm     = false,
-  $amqp    = false,
-  $phalcon = false
+  $fpm         = false,
+  $amqp        = false,
+  $phalcon     = false,
+  $environment = php5::params::environment
 
 ) inherits php5::params {
 
