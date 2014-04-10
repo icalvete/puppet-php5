@@ -64,7 +64,7 @@ class php5::php5-fpm::config {
     }
   }
 
-  if $php5::params::environment == 'DEV' {
+  if $php5::environment == 'DEV' {
     augeas{'display_errors_fpm':
       context => "/files/${php5::params::php5_fpm_phpini}/PHP",
       changes => 'set display_errors On',
