@@ -9,7 +9,6 @@ class php5::php5-fpm::config {
     context => "/files/${php5::params::php5_fpm_phpini}/PHP",
     changes => [
       'set expose_php Off',
-      'set file_uploads Off',
     ]
   }
 
@@ -63,6 +62,14 @@ class php5::php5-fpm::config {
       onlyif  => "match extension[. = '${php5::params::extension_dir}phalcon.so'] size == 0",
     }
   }
+
+    augeas{'file_uploads_fpm':
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+      changes => [
+        "set file_uploads ${php5::file_uploads}",
+        "set upload_max_filesize ${php5::file_uploads_size}",
+      ]
+    }
 
   if $php5::environment == 'DEV' {
     augeas{'display_errors_fpm':

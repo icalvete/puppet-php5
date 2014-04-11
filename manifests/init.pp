@@ -1,9 +1,11 @@
 class php5 (
 
-  $fpm         = false,
-  $amqp        = false,
-  $phalcon     = false,
-  $environment = $php5::params::environment
+  $fpm               = false,
+  $amqp              = false,
+  $phalcon           = false,
+  $environment       = $php5::params::environment,
+  $file_uploads      = 'Off',
+  $file_uploads_size = $php5::params::file_uploads_size
 
 ) inherits php5::params {
 
