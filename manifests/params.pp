@@ -1,10 +1,13 @@
 class php5::params {
 
-  $environment = hiera('environment')
-  $timezone = 'Europe/Madrid'
+  $environment = $::environment
+  $timezone    = 'Europe/Madrid'
 
   $phalcon_support = {
-    'Debian' => { 'saucy' => true }
+    'Debian' => {
+      'saucy'  => true,
+      'trusty' => true,
+    }
   }
 
   $syslog_facility     = 'local4'
@@ -17,7 +20,7 @@ class php5::params {
       $php5_fpm_package  = 'php5-fpm'
 
       case $::lsbdistcodename {
-        /^saucy/: {
+        /^(saucy|trusty)/: {
           $php5_modules = ['php5-curl','php5-mysqlnd','php5-memcached', 'php5-json', 'php5-mongo']
         }
         default: {
