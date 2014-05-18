@@ -13,6 +13,8 @@ class php5::params {
   $syslog_facility     = 'local4'
   $syslog_facility_php = 'LOG_LOCAL4'
 
+  $file_uploads_size = '10M'
+
   case $::operatingsystem {
     /^(Debian|Ubuntu)$/: {
       $php5_package      = 'php5'

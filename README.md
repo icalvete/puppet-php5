@@ -24,6 +24,7 @@ Install apache2 with php5 + fpm (See http://php-fpm.org/)
 
 Need https://github.com/icalvete/puppet-apache2
 
+```puppet
     class roles::apache2_server (
       
       $ssl       = true,
@@ -53,6 +54,7 @@ Need https://github.com/icalvete/puppet-apache2
         }
       }
     }
+```
 
 ##TODO:
 
