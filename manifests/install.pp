@@ -13,11 +13,11 @@ class php5::install inherits php5::params {
     /^(Debian|Ubuntu)$/: {
 
       package {'libapache2-mod-php5':
-        ensure => absent
+        ensure => purged
       }
 
       package {'libapache2-mod-php5filter':
-          ensure => absent
+          ensure => purged
       }
     }
     default:{}
