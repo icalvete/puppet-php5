@@ -1,7 +1,7 @@
 class php5::params {
 
-  $environment = $::environment
-  $timezone    = 'Europe/Madrid'
+  $env      = $::environment
+  $timezone = 'Europe/Madrid'
 
   $phalcon_support = {
     'Debian' => {

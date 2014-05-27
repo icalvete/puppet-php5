@@ -46,8 +46,8 @@ class php5::php5-fpm::config {
   }
 
   exec{ 'config_fpm_syslog_ident':
-    command => "/bin/sed -i -e \"s/;\?syslog.ident = .*/syslog.ident = ::${environment}::php-fpm::/\" ${php5::params::php5_fpm_conf}",
-    unless  => "/bin/grep 'syslog.ident = ::${environment}::php-fpm::' ${php5::params::php5_fpm_conf}"
+    command => "/bin/sed -i -e \"s/;\?syslog.ident = .*/syslog.ident = ::${php5::env}::php-fpm::/\" ${php5::params::php5_fpm_conf}",
+    unless  => "/bin/grep 'syslog.ident = ::${php5::env}::php-fpm::' ${php5::params::php5_fpm_conf}"
   }
 
   exec{ 'config_fpm_syslog_facility':
@@ -75,7 +75,7 @@ class php5::php5-fpm::config {
       ]
     }
 
-  if $php5::environment == 'DEV' {
+  if $php5::env == 'DEV' {
     augeas{'display_errors_fpm':
       context => "/files/${php5::params::php5_fpm_phpini}/PHP",
       changes => 'set display_errors On',
