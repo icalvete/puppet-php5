@@ -40,6 +40,26 @@ class php5::php5-fpm::config {
     unless  => "/bin/grep 'listen.allowed_clients = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"
   }
 
+  exec{ 'config_www_pool_max_children':
+    command => "/bin/sed -i -e \"s/pm.max_children = .*/pm.max_children = 100/\" ${php5::params::php5_fpm_www_pool}",
+    unless  => "/bin/grep 'pm.max_children = 128' ${php5::params::php5_fpm_www_pool}"
+  }
+
+  exec{ 'config_www_pool_start_servers':
+    command => "/bin/sed -i -e \"s/pm.start_servers = .*/;pm.start_servers = 5/\" ${php5::params::php5_fpm_www_pool}",
+    unless  => "/bin/grep ';pm.start_servers = 5' ${php5::params::php5_fpm_www_pool}"
+  }
+
+  exec{ 'config_www_pool_min_spare_servers':
+    command => "/bin/sed -i -e \"s/pm.min_spare_servers = .*/pm.min_spare_servers = 20/\" ${php5::params::php5_fpm_www_pool}",
+    unless  => "/bin/grep 'pm.min_spare_servers = 32' ${php5::params::php5_fpm_www_pool}"
+  }
+
+  exec{ 'config_www_pool_max_spare_servers':
+    command => "/bin/sed -i -e \"s/pm.max_spare_servers = .*/pm.max_spare_servers = 30/\" ${php5::params::php5_fpm_www_pool}",
+    unless  => "/bin/grep 'pm.max_spare_servers = 64' ${php5::params::php5_fpm_www_pool}"
+  }
+
   exec{ 'config_fpm_syslog_error_log':
     command => "/bin/sed -i -e \"s/error_log = .*/error_log = syslog/\" ${php5::params::php5_fpm_conf}",
     unless  => "/bin/grep 'error_log = syslog' ${php5::params::php5_fpm_conf}"
