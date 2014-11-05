@@ -10,8 +10,8 @@ class php5::params {
     }
   }
 
-  $syslog_facility     = 'local4'
-  $syslog_facility_php = 'LOG_LOCAL4'
+  $syslog_facility     = 'local3'
+  $syslog_facility_php = 'LOG_LOCAL3'
 
   $file_uploads_size = '10M'
 
