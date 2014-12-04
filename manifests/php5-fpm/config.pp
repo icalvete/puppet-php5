@@ -66,8 +66,8 @@ class php5::php5-fpm::config {
   }
 
   exec{ 'config_fpm_syslog_ident':
-    command => "/bin/sed -i -e \"s/;\?syslog.ident = .*/syslog.ident = ::${php5::env}::php-fpm::/\" ${php5::params::php5_fpm_conf}",
-    unless  => "/bin/grep 'syslog.ident = ::${php5::env}::php-fpm::' ${php5::params::php5_fpm_conf}"
+    command => "/bin/sed -i -e \"s/;\?syslog.ident = .*/syslog.ident = ::php-fpm::${php5::env}::/\" ${php5::params::php5_fpm_conf}",
+    unless  => "/bin/grep 'syslog.ident = ::php-fpm::${php5::env}::' ${php5::params::php5_fpm_conf}"
   }
 
   exec{ 'config_fpm_syslog_facility':
