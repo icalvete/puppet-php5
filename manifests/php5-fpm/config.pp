@@ -75,6 +75,11 @@ class php5::php5-fpm::config {
     unless  => "/bin/grep 'syslog.facility = ${php5::params::syslog_facility}'"
   }
 
+  exec{ 'config_fpm_log_level':
+    command => "/bin/sed -i -e \"s/;\?log_level = .*/log_level = ${php5::params::log_level}/\" ${php5::params::php5_fpm_conf}",
+    unless  => "/bin/grep 'log_level = ${php5::params::log_level}'"
+  }
+
   if $php5::phalcon {
     file{ 'name':
       ensure  => present,
