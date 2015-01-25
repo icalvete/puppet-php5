@@ -66,13 +66,18 @@ class php5::php5-fpm::config {
   }
 
   exec{ 'config_fpm_syslog_ident':
-    command => "/bin/sed -i -e \"s/;\?syslog.ident = .*/syslog.ident = ::${php5::env}::php-fpm::/\" ${php5::params::php5_fpm_conf}",
-    unless  => "/bin/grep 'syslog.ident = ::${php5::env}::php-fpm::' ${php5::params::php5_fpm_conf}"
+    command => "/bin/sed -i -e \"s/;\?syslog.ident = .*/syslog.ident = ::php-fpm::${php5::env}::/\" ${php5::params::php5_fpm_conf}",
+    unless  => "/bin/grep 'syslog.ident = ::php-fpm::${php5::env}::' ${php5::params::php5_fpm_conf}"
   }
 
   exec{ 'config_fpm_syslog_facility':
     command => "/bin/sed -i -e \"s/;\?syslog.facility = .*/syslog.facility = ${php5::params::syslog_facility}/\" ${php5::params::php5_fpm_conf}",
     unless  => "/bin/grep 'syslog.facility = ${php5::params::syslog_facility}'"
+  }
+
+  exec{ 'config_fpm_log_level':
+    command => "/bin/sed -i -e \"s/;\?log_level = .*/log_level = ${php5::params::log_level}/\" ${php5::params::php5_fpm_conf}",
+    unless  => "/bin/grep 'log_level = ${php5::params::log_level}'"
   }
 
   if $php5::phalcon {
