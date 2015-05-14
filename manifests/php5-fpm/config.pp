@@ -90,7 +90,7 @@ class php5::php5-fpm::config {
   }
 
   if $php5::phalcon {
-    file{ 'name':
+    file{ 'phalcon_config_fpm':
       ensure  => present,
       path    => "${php5::params::php5_fpm_phpconf}/50-phalcon.ini",
       owner   => 'root',
