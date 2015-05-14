@@ -34,6 +34,7 @@ class php5::params {
       }
 
       $php5_cli_phpini   = 'etc/php5/cli/php.ini'
+      $php5_cli_phpconf  = '/etc/php5/cli/conf.d'
       $php5_includepath  = '/usr/share/php5'
       $php5_fpm_phpini   = '/etc/php5/fpm/php.ini'
       $php5_fpm_phpconf  = '/etc/php5/fpm/conf.d'

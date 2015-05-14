@@ -34,7 +34,7 @@ class php5::php5-cli::config {
   if $php5::phalcon {
     file{ 'phalcon_config_cli':
       ensure  => present,
-      path    => "${php5::params::php5_fpm_phpconf}/50-phalcon.ini",
+      path    => "${php5::params::php5_cli_phpconf}/50-phalcon.ini",
       owner   => 'root',
       group   => 'root',
       mode    => '0664',
