@@ -37,7 +37,7 @@ class php5::install inherits php5::params {
 
   if $php5::phalcon {
 
-    if $php5::phalcon == 2{
+    if $php5::phalcon == '2' {
       $phalcon_module = 'phalcon2.so'
     } else {
       $phalcon_module = 'phalcon.so'
