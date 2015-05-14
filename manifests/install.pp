@@ -52,4 +52,11 @@ class php5::install inherits php5::params {
       mode   => '0644',
     }
   }
+
+  if $environment == 'DEV' {
+  
+    package { 'php5-xdebug':
+      ensure  => present
+    }
+  }
 }
