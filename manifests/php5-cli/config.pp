@@ -31,13 +31,16 @@ class php5::php5-cli::config {
     ]
   }
 
-
   if $php5::phalcon {
-    augeas{'phalcon_cli':
-      context => "/files/${php5::params::php5_cli_phpini}/PHP",
-      changes => "set extension[last()+1] ${php5::params::extension_dir}phalcon.so",
-      onlyif  => "match extension[. = '${php5::params::extension_dir}phalcon.so'] size == 0"
+    file{ 'name':
+      ensure  => present,
+      path    => "${php5::params::php5_fpm_phpconf}/50-phalcon.ini",
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0664',
+      content => 'extension=/usr/lib/php5/phalcon.so'
     }
+
   }
 
   if $php5::env == 'DEV' {
