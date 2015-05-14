@@ -30,6 +30,15 @@ class php5::php5-fpm::config {
     ]
   }
 
+  augeas{'file_uploads_fpm':
+    context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+    changes => [
+      "set file_uploads ${php5::file_uploads}",
+      "set upload_max_filesize ${php5::file_uploads_size}",
+      "set post_max_size ${php5::file_uploads_size}",
+    ]
+  }
+
   exec{ 'config_www_pool_listen':
     command => "/bin/sed -i -e \"s/listen = .*/listen = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
     unless  => "/bin/grep 'listen = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"
@@ -91,14 +100,6 @@ class php5::php5-fpm::config {
     }
 
   }
-
-    augeas{'file_uploads_fpm':
-      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
-      changes => [
-        "set file_uploads ${php5::file_uploads}",
-        "set upload_max_filesize ${php5::file_uploads_size}",
-      ]
-    }
 
   if $php5::env == 'DEV' {
     augeas{'display_errors_fpm':
