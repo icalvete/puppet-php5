@@ -16,7 +16,7 @@ class php5::php5-cli::config {
   augeas{'cli_performance' :
     context => "/files/${php5::params::php5_cli_phpini}/PHP",
     changes => [
-      'set max_execution_time 15',
+      "set max_execution_time ${php5::max_execution_time_cli}",
       'set max_input_time 15',
       'set memory_limit 32M',
       "set date.timezone ${php5::params::timezone}",
@@ -48,12 +48,5 @@ class php5::php5-cli::config {
       context => "/files/${php5::params::php5_cli_phpini}/PHP",
       changes => 'set display_errors On',
     }
-  }
-  
-  augeas{'cli_max_execution_time' :
-    context => "/files/${php5::params::php5_fpm_phpini}/PHP",
-    changes => [
-      "set max_execution_time ${php5::max_execution_time_cli}",
-    ]
   }
 }

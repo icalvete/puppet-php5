@@ -15,7 +15,7 @@ class php5::php5-fpm::config {
   augeas{'fpm_performance' :
     context => "/files/${php5::params::php5_fpm_phpini}/PHP",
     changes => [
-      'set max_execution_time 15',
+      "set max_execution_time ${php5::max_execution_time_fpm}",
       'set max_input_time 15',
       'set memory_limit 32M',
       "set date.timezone ${php5::params::timezone}",
@@ -36,13 +36,6 @@ class php5::php5-fpm::config {
       "set file_uploads ${php5::file_uploads}",
       "set upload_max_filesize ${php5::file_uploads_size}",
       "set post_max_size ${php5::file_uploads_size}",
-    ]
-  }
-
-  augeas{'fpm_max_execution_time' :
-    context => "/files/${php5::params::php5_fpm_phpini}/PHP",
-    changes => [
-      "set max_execution_time ${php5::max_execution_time_fpm}",
     ]
   }
 
