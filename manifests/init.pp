@@ -1,11 +1,13 @@
 class php5 (
 
-  $fpm               = false,
-  $amqp              = false,
-  $phalcon           = false,
-  $env               = $php5::params::env,
-  $file_uploads      = 'Off',
-  $file_uploads_size = $php5::params::file_uploads_size
+  $fpm                    = false,
+  $amqp                   = false,
+  $phalcon                = false,
+  $env                    = $php5::params::env,
+  $file_uploads           = 'Off',
+  $file_uploads_size      = $php5::params::file_uploads_size,
+  $max_execution_time_cli = $php5::params::max_execution_time,
+  $max_execution_time_fpm = $php5::params::max_execution_time
 
 ) inherits php5::params {
 

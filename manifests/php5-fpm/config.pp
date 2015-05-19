@@ -39,6 +39,13 @@ class php5::php5-fpm::config {
     ]
   }
 
+  augeas{'fpm_max_execution_time' :
+    context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+    changes => [
+      "set max_execution_time ${php5::max_execution_time_fpm}",
+    ]
+  }
+
   exec{ 'config_www_pool_listen':
     command => "/bin/sed -i -e \"s/listen = .*/listen = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
     unless  => "/bin/grep 'listen = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"

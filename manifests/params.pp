@@ -17,6 +17,7 @@ class php5::params {
   $log_level = 'warning'
 
   $file_uploads_size = '10M'
+  $max_execution_time = '15'
 
   case $::operatingsystem {
     /^(Debian|Ubuntu)$/: {

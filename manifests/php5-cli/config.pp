@@ -49,4 +49,11 @@ class php5::php5-cli::config {
       changes => 'set display_errors On',
     }
   }
+  
+  augeas{'cli_max_execution_time' :
+    context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+    changes => [
+      "set max_execution_time ${php5::max_execution_time_cli}",
+    ]
+  }
 }
