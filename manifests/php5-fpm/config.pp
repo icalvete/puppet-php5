@@ -17,8 +17,14 @@ class php5::php5-fpm::config {
     changes => [
       "set max_execution_time ${php5::max_execution_time_fpm}",
       'set max_input_time 15',
-      'set memory_limit 32M',
       "set date.timezone ${php5::params::timezone}",
+    ]
+  }
+
+  augeas{'fpm_memory_limit' :
+    context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+    changes => [
+      "set memory_limit ${php5::memory_limit_fpm}",
     ]
   }
 
@@ -107,9 +113,9 @@ class php5::php5-fpm::config {
       changes => 'set display_errors On',
     }
   }
-  
+
   if $environment == 'DEV' {
-  
+
     file {'xdebug_config':
       ensure  => file,
       path    => "${php5::params::php5_fpm_phpconf}/20-xdebug.ini",

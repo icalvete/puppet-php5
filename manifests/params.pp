@@ -16,8 +16,9 @@ class php5::params {
   # log_level values can be alert, error, warning, notice, debug
   $log_level = 'warning'
 
-  $file_uploads_size = '10M'
+  $file_uploads_size  = '10M'
   $max_execution_time = '15'
+  $memory_limit       = '32M'
 
   case $::operatingsystem {
     /^(Debian|Ubuntu)$/: {

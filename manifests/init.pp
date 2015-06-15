@@ -7,7 +7,9 @@ class php5 (
   $file_uploads           = 'Off',
   $file_uploads_size      = $php5::params::file_uploads_size,
   $max_execution_time_cli = $php5::params::max_execution_time,
-  $max_execution_time_fpm = $php5::params::max_execution_time
+  $max_execution_time_fpm = $php5::params::max_execution_time,
+  $memory_limit_cli       = $php5::params::memory_limit,
+  $memory_limit_fpm       = $php5::params::memory_limit,
 
 ) inherits php5::params {
 

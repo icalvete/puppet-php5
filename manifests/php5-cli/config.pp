@@ -18,8 +18,14 @@ class php5::php5-cli::config {
     changes => [
       "set max_execution_time ${php5::max_execution_time_cli}",
       'set max_input_time 15',
-      'set memory_limit 32M',
       "set date.timezone ${php5::params::timezone}",
+    ]
+  }
+
+  augeas{'cli_memory_limit' :
+    context => "/files/${php5::params::php5_cli_phpini}/PHP",
+    changes => [
+      "set memory_limit ${php5::memory_limit_cli}",
     ]
   }
 
