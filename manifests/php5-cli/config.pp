@@ -2,7 +2,7 @@ class php5::php5-cli::config {
 
   augeas{'include_path_cli' :
     context => "/files/${php5::params::php5_cli_phpini}/PHP",
-    changes => "set include_path .:${php5::params::php5_includepath}",
+    changes => "set include_path .:${php5::params::php5_includepath}:/usr/share/php",
   }
 
   augeas{'cli_security' :
