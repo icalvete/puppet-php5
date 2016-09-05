@@ -107,6 +107,24 @@ class php5::php5-fpm::config {
 
   }
 
+  if $php5::opcache {
+    augeas{'opcache_config_fpm':
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+      changes => [
+        "set opcache.enable 1",
+        "set opcache.validate_timestamps 0",
+        "set opcache.blacklist_filename /etc/php5/opcache.blacklist",
+      ]
+    }
+
+    file {'opcache_config_fpm_blacklist"':
+      ensure  => file,
+      path    => '/etc/php5/opcache.blacklist',
+      content => template("${module_name}/opcache.blacklist.erb"),
+      mode    => '0644',
+    }
+  }
+
   if $php5::env == 'DEV' {
     augeas{'display_errors_fpm':
       context => "/files/${php5::params::php5_fpm_phpini}/PHP",

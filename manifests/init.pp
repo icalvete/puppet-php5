@@ -3,6 +3,8 @@ class php5 (
   $fpm                    = false,
   $amqp                   = false,
   $phalcon                = false,
+  $opcache                = false,
+  $opcache_blacklist      = [''],
   $env                    = $php5::params::env,
   $file_uploads           = 'Off',
   $file_uploads_size      = $php5::params::file_uploads_size,
