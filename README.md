@@ -25,35 +25,23 @@ Install apache2 with php5 + fpm (See http://php-fpm.org/)
 Need https://github.com/icalvete/puppet-apache2
 
 ```puppet
-    class roles::apache2_server (
-      
-      $ssl       = true,
-      $passenger = true,
-      
-      ) inherits roles {
-	      
-      include apache2
-      
-      class {'php5':
-        fpm => true
-      }
-      
-      if $ssl {
-        apache2::module {'ssl':
-	  require => Class['apache2::install']
-        }
-      
-        apache2::site {'default-ssl':
-          require => Class['apache2::install']
-        }
-      }
-     
-      if $passenger {
-        apache2::module {'passenger':
-          require => Class['apache2::install']
-        }
-      }
-    }
+node 'ubuntu01.smartpurposes.net' inherits test_defaults {
+  class {'roles::apache2_server':
+    php                    => true,
+    file_uploads           => 'On',
+    file_uploads_size      => '500M',
+    max_execution_time_fpm => '60'
+  }
+}
+
+node 'ubuntu02.smartpurposes.net' inherits test_defaults {
+  class {'roles::apache2_server':
+    php                    => 5,
+    file_uploads           => 'On',
+    file_uploads_size      => '500M',
+    max_execution_time_fpm => '60'
+  }
+}
 ```
 
 ##TODO:
