@@ -5,5 +5,6 @@ class php5::php5-fpm::service {
     hasstatus  => true,
     hasrestart => true,
     enable     => true,
+    provider   => 'systemd'
   }
 }

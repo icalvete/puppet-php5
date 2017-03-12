@@ -5,7 +5,7 @@ class php5::php5-fpm inherits php5::params {
   }
 
   class {'php5::php5-fpm::install':
-    require => Anchor['php5::php5-fpm::begin']
+    require => [Anchor['php5::php5-fpm::begin'], Apt::Ppa['ppa:ondrej/php']]
   }
 
   class {'php5::php5-fpm::config':

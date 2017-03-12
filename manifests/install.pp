@@ -1,18 +1,34 @@
 class php5::install inherits php5::params {
 
+  include apt
+  apt::ppa { 'ppa:ondrej/php': }
+
+  file { $php5::params::php5_includepath:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0775',
+  }
+
   package {$php5::params::php5_package:
-    ensure => present
+    ensure  => present,
+    require => [
+      Apt::Ppa['ppa:ondrej/php'],
+      Class['apt::update']]
   }
 
   class {'php5::php5-cli::install':
-    require => Package[$php5::params::php5_package]
+    require => [
+      Package[$php5::params::php5_package],
+      Apt::Ppa['ppa:ondrej/php'],
+      Class['apt::update']]
   }
 
   case $::operatingsystem {
 
     /^(Debian|Ubuntu)$/: {
 
-      package {'libapache2-mod-php5':
+      package {'libapache2-mod-php5.6':
         ensure => purged
       }
 
@@ -23,17 +39,7 @@ class php5::install inherits php5::params {
     default:{}
   }
 
-  if $php5::params::php5_modules {
-    php5::module { $php5::params::php5_modules:}
-  }
-
-  if member($php5::params::php5_modules, 'php5-mongo') {
-    exec {'enable_php5-mongo':
-      command => '/usr/sbin/php5enmod mongo',
-      user    => 'root',
-      require => Php5::Module[$php5::params::php5_modules]
-    }
-  }
+  include php5::modules
 
   if $php5::phalcon {
 
@@ -44,19 +50,27 @@ class php5::install inherits php5::params {
     }
 
     file {'phalcon.so':
-      ensure => present,
-      path   => "${php5::params::extension_dir}/phalcon.so",
-      source => "puppet:///modules/${module_name}/phalcon/${::osfamily}/${::lsbdistcodename}/${$phalcon_module}",
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
+      ensure  => present,
+      path    => "${php5::params::extension_dir}/phalcon.so",
+      source  => "puppet:///modules/${module_name}/phalcon/${::osfamily}/${::lsbdistcodename}/${$phalcon_module}",
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      require => Package[$php5::params::php5_package]
     }
   }
 
   if $environment == 'DEV' {
-  
+
     package { 'php5-xdebug':
       ensure  => present
     }
+  }
+
+  file {'augeas_php_len':
+    ensure =>  present,
+    path =>  '/usr/share/augeas/lenses/dist/php.aug',
+    content =>  template("${module_name}/php.aug.erb"),
+    mode =>  '0664',
   }
 }
