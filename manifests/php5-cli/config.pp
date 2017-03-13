@@ -16,7 +16,7 @@ class php5::php5-cli::config {
   augeas{'cli_performance' :
     context => "/files/${php5::params::php5_cli_phpini}/PHP",
     changes => [
-      "set max_execution_time ${php5::max_execution_time_cli}",
+      "set max_execution_time ${php5::params::max_execution_time}",
       'set max_input_time 15',
       "set date.timezone ${php5::params::timezone}",
     ]
@@ -25,7 +25,7 @@ class php5::php5-cli::config {
   augeas{'cli_memory_limit' :
     context => "/files/${php5::params::php5_cli_phpini}/PHP",
     changes => [
-      "set memory_limit ${php5::memory_limit_cli}",
+      "set memory_limit ${php5::params::memory_limit}",
     ]
   }
 
@@ -44,7 +44,7 @@ class php5::php5-cli::config {
       owner   => 'root',
       group   => 'root',
       mode    => '0664',
-      content => 'extension=/usr/lib/php5/phalcon.so'
+      content => 'extension=/usr/lib/php/phalcon.so'
     }
 
   }

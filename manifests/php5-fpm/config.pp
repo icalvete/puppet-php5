@@ -2,7 +2,7 @@ class php5::php5-fpm::config {
 
   augeas{'include_path_fpm' :
     context => "/files/${php5::params::php5_fpm_phpini}/PHP",
-    changes => 'set include_path .:/usr/share/php5',
+    changes => 'set include_path .:/usr/share/php',
   }
 
   augeas{'fpm_security' :
@@ -56,7 +56,7 @@ class php5::php5-fpm::config {
   }
 
   exec{ 'config_www_pool_max_children':
-    command => "/bin/sed -i -e \"s/pm.max_children = .*/pm.max_children = 100/\" ${php5::params::php5_fpm_www_pool}",
+    command => "/bin/sed -i -e \"s/pm.max_children = .*/pm.max_children = 128/\" ${php5::params::php5_fpm_www_pool}",
     unless  => "/bin/grep 'pm.max_children = 128' ${php5::params::php5_fpm_www_pool}"
   }
 
@@ -66,12 +66,12 @@ class php5::php5-fpm::config {
   }
 
   exec{ 'config_www_pool_min_spare_servers':
-    command => "/bin/sed -i -e \"s/pm.min_spare_servers = .*/pm.min_spare_servers = 20/\" ${php5::params::php5_fpm_www_pool}",
+    command => "/bin/sed -i -e \"s/pm.min_spare_servers = .*/pm.min_spare_servers = 32/\" ${php5::params::php5_fpm_www_pool}",
     unless  => "/bin/grep 'pm.min_spare_servers = 32' ${php5::params::php5_fpm_www_pool}"
   }
 
   exec{ 'config_www_pool_max_spare_servers':
-    command => "/bin/sed -i -e \"s/pm.max_spare_servers = .*/pm.max_spare_servers = 30/\" ${php5::params::php5_fpm_www_pool}",
+    command => "/bin/sed -i -e \"s/pm.max_spare_servers = .*/pm.max_spare_servers = 64/\" ${php5::params::php5_fpm_www_pool}",
     unless  => "/bin/grep 'pm.max_spare_servers = 64' ${php5::params::php5_fpm_www_pool}"
   }
 
@@ -102,9 +102,27 @@ class php5::php5-fpm::config {
       owner   => 'root',
       group   => 'root',
       mode    => '0664',
-      content => 'extension=/usr/lib/php5/phalcon.so'
+      content => 'extension=/usr/lib/php/phalcon.so'
     }
 
+  }
+
+  if $php5::opcache {
+    augeas{'opcache_config_fpm':
+      context => "/files/${php5::params::php5_fpm_phpini}/PHP",
+      changes => [
+        "set opcache.enable 1",
+        "set opcache.validate_timestamps 0",
+        "set opcache.blacklist_filename /etc/php/5.6/opcache.blacklist",
+      ]
+    }
+
+    file {'opcache_config_fpm_blacklist"':
+      ensure  => file,
+      path    => '/etc/php/5.6/opcache.blacklist',
+      content => template("${module_name}/opcache.blacklist.erb"),
+      mode    => '0644',
+    }
   }
 
   if $php5::env == 'DEV' {

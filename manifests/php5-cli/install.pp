@@ -1,7 +1,9 @@
 class php5::php5-cli::install {
 
-  package {'php5-cli':
-    ensure => present
+  include php5::modules
+
+  package {'php5.6-cli':
+    ensure => present,
   }
 
   file {'cli_syslog_config':
