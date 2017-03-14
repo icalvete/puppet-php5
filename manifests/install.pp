@@ -17,7 +17,8 @@ class php5::install inherits php5::params {
       Class['apt::update']]
   }
 
-  class {'php5::php5-cli::install':
+  class {'php5::php5_cli::install':
+    phalcon => $php5::phalcon,
     require => [
       Package[$php5::params::php5_package],
       Apt::Ppa['ppa:ondrej/php'],

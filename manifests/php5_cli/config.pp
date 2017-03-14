@@ -1,4 +1,4 @@
-class php5::php5-cli::config {
+class php5::php5_cli::config {
 
   augeas{'include_path_cli' :
     context => "/files/${php5::params::php5_cli_phpini}/PHP",
@@ -37,7 +37,7 @@ class php5::php5-cli::config {
     ]
   }
 
-  if $php5::phalcon {
+  if $php5::php5_cli::phalcon {
     file{ 'phalcon_config_cli':
       ensure  => present,
       path    => "${php5::params::php5_cli_phpconf}/50-phalcon.ini",
@@ -49,10 +49,17 @@ class php5::php5-cli::config {
 
   }
 
-  if $php5::env == 'DEV' {
+  if $php5::php5_cli::env == 'DEV' {
     augeas{'display_errors_cli':
       context => "/files/${php5::params::php5_cli_phpini}/PHP",
       changes => 'set display_errors On',
     }
+  }
+
+  file {'cli_syslog_config':
+    ensure  => present,
+    path    => "${php5::params::php5_includepath}/cli_log.php",
+    content => template("${module_name}/cli_log.php.erb"),
+    mode    => '0664',
   }
 }
