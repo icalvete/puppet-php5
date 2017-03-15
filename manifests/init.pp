@@ -20,11 +20,15 @@ class php5 (
   }
 
   anchor {'php5::begin':
-    before => Class['php5::install']
+    before => Class['php5::common']
+  }
+  
+  class{'php5::common':
+    require => Anchor['php5::begin']
   }
 
   class {'php5::install':
-    require => Anchor['php5::begin']
+    require => Class['php5::common']
   }
 
   class {'php5::config':

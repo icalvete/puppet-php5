@@ -11,4 +11,11 @@ class php5::modules inherits php5::params {
       require => Php5::Module[$php5::params::php5_modules]
     }
   }
+
+  if $environment == 'DEV' {
+
+    package { 'php5.6-xdebug':
+      ensure  => present,
+    }
+  }
 }
