@@ -7,10 +7,6 @@ class php5::install inherits php5::params {
       Class['apt::update']]
   }
 
-  class {'php5::php5_cli':
-    phalcon => $php5::phalcon
-  }
-
   case $::operatingsystem {
 
     /^(Debian|Ubuntu)$/: {
@@ -28,5 +24,13 @@ class php5::install inherits php5::params {
 
   if $php5::phalcon {
     include php5::phalcon
+  }
+
+  if $php5::fpm {
+      include php5::php5_fpm
+  }
+
+  class {'php5::php5_cli':
+    phalcon => $php5::phalcon
   }
 }

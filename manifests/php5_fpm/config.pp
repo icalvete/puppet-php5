@@ -1,4 +1,4 @@
-class php5::php5-fpm::config {
+class php5::php5_fpm::config {
 
   augeas{'include_path_fpm' :
     context => "/files/${php5::params::php5_fpm_phpini}/PHP",

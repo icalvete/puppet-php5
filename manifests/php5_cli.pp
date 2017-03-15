@@ -8,15 +8,15 @@ class php5::php5_cli (
 ) inherits php5::params {
 
   anchor{'php5::php5_cli::begin':
-    before => Class['php5::common']
+    before => Class['php5::php5_cli::common']
   }
 
-  class{'php5::common':
+  class{'php5::php5_cli::common':
     require => Anchor['php5::php5_cli::begin']
   }
 
   class{'php5::php5_cli::install':
-    require => Class['php5::common']
+    require => Class['php5::php5_cli::common']
   }
 
   class{'php5::php5_cli::config':

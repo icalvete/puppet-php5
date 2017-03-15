@@ -1,4 +1,4 @@
-class php5::php5-fpm::service {
+class php5::php5_fpm::service {
 
   if versioncmp($operatingsystemrelease, '15.04') < 0 {
 

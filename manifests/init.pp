@@ -35,12 +35,6 @@ class php5 (
     require => Class['php5::install']
   }
 
-  if $fpm {
-      class {'php5::php5-fpm':
-        require => Class['php5::config'],
-      }
-  }
-
   anchor {'php5::end':
     require => Class['php5::config']
   }
