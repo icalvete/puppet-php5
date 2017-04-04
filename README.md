@@ -1,4 +1,4 @@
-#puppet-php5
+# puppet-php5
 
 Puppet manifest to install and configure php5
 
@@ -10,7 +10,7 @@ Puppet manifest to install and configure php5
 * php5 cli
 * include phalcon module (Only for Ubuntu saucy)
 
-##Requires:
+## Requires:
 
 * Only works on Ubuntu
 * [hiera](http://docs.puppetlabs.com/hiera/1/index.html)
@@ -18,7 +18,7 @@ Puppet manifest to install and configure php5
 * https://github.com/icalvete/puppet-common but really only need:
   + common::add_env define.
 
-##Examples:
+## Examples:
 
 Install apache2 with php5 + fpm (See http://php-fpm.org/)
 
@@ -44,11 +44,11 @@ node 'ubuntu02.smartpurposes.net' inherits test_defaults {
 }
 ```
 
-##TODO:
+## TODO:
 
 * Some values must be parametriced
 * Documentation
 
-##Authors:
+## Authors:
 		 
 Israel Calvete Talavera <icalvete@gmail.com>
