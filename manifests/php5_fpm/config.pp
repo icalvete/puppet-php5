@@ -49,7 +49,8 @@ class php5::php5_fpm::config {
     context => "/files/${php5::params::php5_memcachedini}/PHP",
     changes => [
       'set memcached.compression_threshold 15000',
-    ]
+    ],
+    require => Package['php5.6-memcached']
   }
 
   exec{ 'config_www_pool_listen':

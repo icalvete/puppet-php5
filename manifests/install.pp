@@ -12,11 +12,13 @@ class php5::install inherits php5::params {
     /^(Debian|Ubuntu)$/: {
 
       package {'libapache2-mod-php5.6':
-        ensure => purged
+        ensure  => purged,
+        require => Package[$php5::params::php5_package, 'apache2']
       }
 
       package {'libapache2-mod-php5filter':
-          ensure => purged
+        ensure => purged,
+        require => Package[$php5::params::php5_package, 'apache2']
       }
     }
     default:{}
