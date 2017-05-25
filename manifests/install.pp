@@ -17,7 +17,7 @@ class php5::install inherits php5::params {
       }
 
       package {'libapache2-mod-php5filter':
-        ensure => purged,
+        ensure  => purged,
         require => Package[$php5::params::php5_package, 'apache2']
       }
     }
@@ -33,6 +33,8 @@ class php5::install inherits php5::params {
   }
 
   class {'php5::php5_cli':
-    phalcon => $php5::phalcon
+    max_execution_time_cli => $php5::max_execution_time_cli,
+    memory_limit_cli       => $php5::memory_limit_cli,
+    phalcon                => $php5::phalcon
   }
 }
