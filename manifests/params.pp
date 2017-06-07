@@ -61,5 +61,6 @@ class php5::params {
       fail ("${::operatingsystem} not supported.")
     }
   }
-      $php5_memcachedini = "/etc/php/5.6/mods-available/memcached.ini"
+      $php5_memcachedini               = "/etc/php/5.6/mods-available/memcached.ini"
+      $memcached_compression_threshold = 15000
 }

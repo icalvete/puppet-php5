@@ -45,14 +45,6 @@ class php5::php5_fpm::config {
     ]
   }
 
-  augeas{'memcached_compression_threshold':
-    context => "/files/${php5::params::php5_memcachedini}/PHP",
-    changes => [
-      'set memcached.compression_threshold 15000',
-    ],
-    require => Package['php5.6-memcached']
-  }
-
   exec{ 'config_www_pool_listen':
     command => "/bin/sed -i -e \"s/listen = .*/listen = 0.0.0.0:9000/\" ${php5::params::php5_fpm_www_pool}",
     unless  => "/bin/grep 'listen = 0.0.0.0:9000' ${php5::params::php5_fpm_www_pool}"
