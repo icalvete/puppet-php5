@@ -24,7 +24,7 @@ class php5 (
     before => Class['php5::common']
   }
 
-  class{'php5::common':
+  class {'php5::common':
     require => Anchor['php5::begin']
   }
 
