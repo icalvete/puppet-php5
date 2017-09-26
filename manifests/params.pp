@@ -29,7 +29,7 @@ class php5::params {
 
       case $::lsbdistcodename {
         /^(saucy|trusty|xenial)/: {
-          $php5_modules = ['php5.6-curl','php5.6-mysqlnd','php5.6-memcached', 'php5.6-json', 'php5.6-mcrypt', 'php5.6-mongo', 'php5.6-gd', 'php5.6-mbstring', 'php5.6-bcmath', 'php5.6-xml']
+          $php5_modules = ['php5.6-curl','php5.6-mysqlnd','php5.6-memcached', 'php5.6-json', 'php5.6-mcrypt', 'php5.6-mongo', 'php5.6-gd', 'php5.6-mbstring', 'php5.6-bcmath', 'php5.6-xml', 'php-yaml']
         }
         default: {
           $php5_modules = ['php5.6-curl','php5.6-mysqlnd','php5.6-memcached', 'php5.6-json', 'php5.6-mcrypt']
