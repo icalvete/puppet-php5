@@ -3,11 +3,14 @@ class php5::common {
   include apt
   apt::ppa { 'ppa:ondrej/php': }
 
+  realize Package['augeas-lenses']
+
   file {'augeas_php_len':
     ensure  => present,
     path    => '/usr/share/augeas/lenses/dist/php.aug',
     content => template("${module_name}/php.aug.erb"),
     mode    => '0664',
+    require => Package['augeas-lenses']
   }
 
   file { $php5::params::php5_includepath:

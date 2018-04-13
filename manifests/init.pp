@@ -5,7 +5,7 @@ class php5 (
   $phalcon                         = false,
   $opcache                         = false,
   $opcache_blacklist               = [''],
-  $env                             = $php5::params::env,
+  $env                             = pick($::env, $php5::params::env),
   $file_uploads                    = 'Off',
   $file_uploads_size               = $php5::params::file_uploads_size,
   $max_execution_time_cli          = $php5::params::max_execution_time,

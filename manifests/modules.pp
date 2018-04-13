@@ -12,7 +12,7 @@ class php5::modules inherits php5::params {
     }
   }
 
-  if $environment == 'DEV' {
+  if $php5::env == 'DEV' {
 
     package { 'php5.6-xdebug':
       ensure  => present,

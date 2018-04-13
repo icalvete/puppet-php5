@@ -1,6 +1,6 @@
 class php5::params {
 
-  $env      = $environment
+  $env      = $::env
   $timezone = 'Europe/Madrid'
 
   $phalcon_support = {
