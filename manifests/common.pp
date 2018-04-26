@@ -26,6 +26,4 @@ class php5::common {
     group  => 'root',
     mode   => '0775',
   }
-
-  include php5::modules
 }
