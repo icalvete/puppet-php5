@@ -95,6 +95,16 @@
       unless  => "/bin/grep 'log_level = ${php5::params::log_level}'"
     }
 
+    exec{ 'config_fpm_max_requests':
+      command => "/bin/sed -i -e \"s/;\?pm.max_requests = .*/pm.max_requests = 512/\" ${php5::params::php5_fpm_www_pool}",
+      unless  => "/bin/grep 'pm.max_requests = 512' ${php5::params::php5_fpm_www_pool}"
+    }
+
+    exec{ 'config_fpm_process_idle_timeout':
+      command => "/bin/sed -i -e \"s/;\?pm.process_idle_timeout = .*/pm.process_idle_timeout = 16s;/\" ${php5::params::php5_fpm_www_pool}",
+      unless  => "/bin/grep 'pm.process_idle_timeout = 16s;' ${php5::params::php5_fpm_www_pool}"
+    }
+
     if $php5::phalcon {
       file{ 'phalcon_config_fpm':
         ensure  => present,
