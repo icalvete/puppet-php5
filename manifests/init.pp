@@ -6,6 +6,7 @@ class php5 (
   $opcache                         = false,
   $opcache_blacklist               = [''],
   $env                             = pick($::env, $php5::params::env),
+  $version                         = 6,
   $file_uploads                    = 'Off',
   $file_uploads_size               = $php5::params::file_uploads_size,
   $max_execution_time_cli          = $php5::params::max_execution_time,
