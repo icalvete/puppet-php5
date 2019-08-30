@@ -8,6 +8,7 @@ class php5::params {
       'saucy'  => true,
       'trusty' => true,
       'xenial' => true,
+      'bionic' => true
     }
   }
 
@@ -28,7 +29,7 @@ class php5::params {
       $php5_fpm_package  = 'php5.6-fpm'
 
       case $::lsbdistcodename {
-        /^(saucy|trusty|xenial)/: {
+        /^(saucy|trusty|xenial|bionic)/: {
           $php5_modules = ['php5.6-curl','php5.6-mysqlnd','php5.6-memcached', 'php5.6-json', 'php5.6-mcrypt', 'php5.6-mongo', 'php5.6-gd', 'php5.6-mbstring', 'php5.6-bcmath', 'php5.6-xml', 'php5.6-zip', 'php-yaml']
         }
         default: {
