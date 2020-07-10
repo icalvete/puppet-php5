@@ -75,6 +75,12 @@
       unless  => "/bin/grep 'pm.max_spare_servers = 64' ${php5::params::php5_fpm_www_pool}"
     }
 
+    exec{ 'config_www_pool_pm.max_requests':
+      command => "/bin/sed -i -e \"s/pm.max_requests = .*/pm.max_requests = 64/\" ${php5::params::php5_fpm_www_pool}",
+      unless  => "/bin/grep 'pm.max_requests = 64' ${php5::params::php5_fpm_www_pool}"
+    }
+
+
     exec{ 'config_fpm_syslog_error_log':
       command => "/bin/sed -i -e \"s/error_log = .*/error_log = syslog/\" ${php5::params::php5_fpm_conf}",
       unless  => "/bin/grep 'error_log = syslog' ${php5::params::php5_fpm_conf}"
