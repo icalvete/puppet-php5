@@ -13,6 +13,7 @@ class php5 (
   $max_execution_time_fpm          = $php5::params::max_execution_time,
   $memory_limit_cli                = $php5::params::memory_limit,
   $memory_limit_fpm                = $php5::params::memory_limit,
+  $max_requests_fpm                = $php7::params::max_requests_fpm,
   $memcached_compression_threshold = $php5::params::memcached_compression_threshold
 
 ) inherits php5::params {
@@ -39,7 +40,8 @@ class php5 (
 
   if $fpm {
     class {'php5::php5_fpm':
-      require => Class['php5::config'],
+      max_requests_fpm =>  $max_requests_fpm,
+      require          => Class['php5::config']
     }
   }
 

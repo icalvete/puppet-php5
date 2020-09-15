@@ -102,8 +102,8 @@
     }
 
     exec{ 'config_fpm_max_requests':
-      command => "/bin/sed -i -e \"s/;\?pm.max_requests = .*/pm.max_requests = 512/\" ${php5::params::php5_fpm_www_pool}",
-      unless  => "/bin/grep 'pm.max_requests = 512' ${php5::params::php5_fpm_www_pool}"
+      command => "/bin/sed -i -e \"s/;\?pm.max_requests = .*/pm.max_requests = ${php5::php5_fpm::max_requests_fpm}/\" ${php5::params::php5_fpm_www_pool}",
+      unless  => "/bin/grep 'pm.max_requests = ${php5::php5_fpm::max_requests_fpm}' ${php5::params::php5_fpm_www_pool}"
     }
 
     exec{ 'config_fpm_process_idle_timeout':

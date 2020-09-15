@@ -22,6 +22,8 @@ class php5::params {
   $max_execution_time = '15'
   $memory_limit       = '32M'
 
+  $max_requests_fpm   = '512'
+
   case $::operatingsystem {
     /^(Debian|Ubuntu)$/: {
       $php5_package      = 'php5.6'

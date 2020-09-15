@@ -1,4 +1,9 @@
-class php5::php5_fpm inherits php5::params {
+class php5::php5_fpm (
+
+  $max_requests_fpm = 512
+
+)
+inherits php5::params {
 
   anchor {'php5::php5_fpm::begin':
     before => Class['php5::php5_fpm::install']
